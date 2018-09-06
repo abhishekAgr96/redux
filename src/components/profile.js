@@ -1,17 +1,16 @@
 import React,{Component} from 'react';
-import {Text,View,StyleSheet,Image,AsyncStorage} from 'react-native'
+import {Text,View,StyleSheet,Image,AsyncStorage,TouchableOpacity} from 'react-native'
 import {InputType,MyButton} from './customComponents'
 
 export class Profile extends Component{
     constructor(props){
         super(props);
-        // this.state={
-        //   avatarSource:require('../images/user.png')
-        // }
+        this.state={
+            userDp:require('../images/user.png'),
+        }
     }
     static navigationOptions = {
-        title: 'Profile',
-        // avatarSource:require('./user.png'),
+        title: 'Profile',       
       };
      
     
@@ -24,14 +23,14 @@ export class Profile extends Component{
     render(){
         return (
             <View style={styles.container}>
-                {/* <Image style={styles.dp} source={this.state.avatarSource}></Image> */}
-                
+                <TouchableOpacity onPress={()=>{alert('clicked')}}>
+                    <Image style={styles.dp} source={this.state.userDp}></Image>
+                </TouchableOpacity>
                 {/* <Text>{this.state.avatarSource}</Text> */}
                 <InputType placeholder="name"/>
                 <InputType placeholder="abhishek.agrawal@kelltontech.com"/>
                 <InputType placeholder="387459683"/>
-                <MyButton buttonText="Save" myFunction={()=>{alert('Saved')}}></MyButton> 
-                
+                <MyButton buttonText="Save" myFunction={()=>{alert('Saved')}}></MyButton>      
             </View>
           );
     }

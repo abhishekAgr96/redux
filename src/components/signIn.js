@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Text,View,StyleSheet,Image,Button,AsyncStorage} from 'react-native'
 import {InputType,MyButton} from './customComponents'
+import {Keyboard} from 'react-native'
 
 
 export class SignIn extends Component{
@@ -22,7 +23,7 @@ export class SignIn extends Component{
                 <Text style={{color:'red'}}>{this.state.message}</Text>
                 <InputType placeholder="E-mail" setField={(email)=>{this.setState({email:email})}}/>
                 <InputType placeholder="Password" setField={(password)=>{this.setState({password:password})}}/>
-                <MyButton buttonText="Sign In" myFunction={()=>{this.props.signIn(this.state.email,this.state.password)}}/>
+                <MyButton buttonText="Sign In" myFunction={()=>{Keyboard.dismiss(),  this.props.signIn(this.state.email,this.state.password)}}/>
                 <Text style={{marginTop:10}}>Forget your details?</Text>
                 <Button onPress={()=>{this.props.navigation.navigate('SignUp')}} title='Create a new account'></Button>
                 {/* <Text>email:{this.props.navigation.state.params.email}</Text>
@@ -35,7 +36,7 @@ export class SignIn extends Component{
       //  alert('componentWillReceiveProps called')
          if(nextProps.profileReducer.isLoggedIn){
            //  alert('navigation')
-              this.props.navigation.navigate('Profile')
+              this.props.navigation.navigate('UserList')
          }   //navigation
     }
 }

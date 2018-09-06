@@ -1,0 +1,18 @@
+  <FlatList
+              
+                data= {this.props.store.userDataArray}  //{this.myNewArr}    //{this.state.myJson}
+                onEndReachedThreshold={.8}
+                onEndReached={()=>{this.getToken()}}  // 
+                renderItem={({item})=>{
+                //     myString=JSON.stringify(item);
+                    return(
+                    <View style={styles.user}>
+                         {/* <Text>Item No: {this.state.pageNo}</Text>  */}
+                        <Text>Name:{item.name.title} {item.name.first} {item.name.last}</Text>
+                        <Text>Email:{item.email}</Text>
+                        <Text>Gender: {item.gender}</Text>
+                        <Text>Location:{item.location.city}</Text>  
+                        <Text>Age:{item.dob.age}</Text>
+                    </View>
+                )}}
+              />
