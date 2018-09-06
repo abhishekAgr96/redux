@@ -2,7 +2,11 @@ import React,{Component} from 'react';
 import {Text,View,StyleSheet,Image} from 'react-native'
 import {InputType,MyButton} from './customComponents'
 import {StackActions,NavigationActions} from 'react-navigation'
+import {observer,inject} from 'mobx-react/native'
+import hitApi from '../networkWrapper/hitApi'
 
+@inject("store")
+@observer
 export class SignUp extends Component{
     constructor(props){
         super(props);
@@ -38,7 +42,11 @@ export class SignUp extends Component{
                   } 
                     else
                     {
-                        this.signUpApi();
+                       // this.signUpApi();
+                       this.props.store.name=this.state.name
+                       this.props.store.email=this.state.email
+                       this.props.store.password=this.state.password
+                       this.props.store.signUpApi();
                     }
                 //     {
                 //     let resetAction= StackActions.reset({
@@ -61,36 +69,7 @@ export class SignUp extends Component{
           );
     }
 
-    baseurl="http://192.168.12.39:7000/api/" 
-    signUpApi= async()=> { 
-        try { 
-            let response = await fetch( this.baseurl+"v1/user/createUser",{
-                 method: 'POST', 
-                 headers: { 
-                    Accept: 'application/json', 
-                    'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify({
-                    name:this.state.name,
-                    email:this.state.email,
-                    password:this.state.password
-    
-                  }),
-                } );
-                 let responseJson = await response.json();
-              //    alert("my response"+JSON.stringify(responseJson.success))
-                  if(responseJson.success){
-                      this.props.navigation.goBack();
-                  }
-                  else{
-                      this.setState({message:'User already exist'})
-                  }
-                  return responseJson;
-                 } catch (error) {
-                      alert(error);}
-
-   
-}}
+}
     
 
 const styles=StyleSheet.create({

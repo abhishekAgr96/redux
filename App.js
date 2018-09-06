@@ -14,9 +14,9 @@ import Store from './src/mobexCode/store'
 export default class App extends Component {
   render() {
     return (  
-      <Provider store={new Store()}>
+       <Provider store={new Store()}>
      <StackNavigation/>
-     </Provider>
+      </Provider>
     );
   }
 }

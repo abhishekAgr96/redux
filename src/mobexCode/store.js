@@ -1,8 +1,13 @@
 import {observable,action} from 'mobx'
+import hitApi from '../networkWrapper/hitApi'
 
  export default class Store{
     @observable userDataArray=[]
     pageNO=1;
+    @observable name:string=''
+    @observable email:string=''
+    @observable password:string=''
+    @observable body=[]
 
     @action
     userListApi= async (token)=>{
@@ -28,6 +33,24 @@ import {observable,action} from 'mobx'
       
       }
 
+      @action
+      signInApi=async()=>{
+          this.body.push({email:this.email,password:this.password});
+          
+  //        alert(JSON.stringify(this.body));
+//          alert("email"+this.body[0].email)
+        json= await hitApi.post('SignIn',this.body);
+        
+        this.name=json.data.name;
+        this.email=json.data.email;
+      //  alert("api response"+JSON.stringify(json.data));
+      }
+
+      @action
+      signUpApi=async()=>{
+        this.body.push({name:this.name,email:this.email,password:this.password});  
+        hitApi.post('SignUp',this.body);
+      }
 }
 
 // const storeObj = new Store();
